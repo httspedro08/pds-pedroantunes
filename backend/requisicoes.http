@@ -1,30 +1,6 @@
-### Listar todos os donos
-GET http://localhost:5000/donos
-
-### Buscar um dono pelo id
-GET http://localhost:5000/donos/1
-
-### Cadastrar um novo dono
-POST http://localhost:5000/donos
-Content-Type: application/json
-
-{
-    "nome": "Diego Souza",
-    "telefone": "45999110004"
-}
-
-### Atualizar um dono
-PUT http://localhost:5000/donos/1
-Content-Type: application/json
-
-{
-    "nome": "Ana Paula Ribeiro da Silva",
-    "telefone": "45999110001"
-}
-
-### Remover um dono
-DELETE http://localhost:5000/donos/3
-
+### ----------------------------------------------------------
+### ROTAS DE DONOS
+### ----------------------------------------------------------
 
 ### Listar todos os donos
 GET http://localhost:5000/donos
@@ -51,7 +27,8 @@ Content-Type: application/json
 }
 
 ### Remover um dono
-DELETE http://localhost:5000/donos/3
+DELETE http://localhost:5000/donos/2
+
 
 ### ----------------------------------------------------------
 ### ROTAS DE PETS
@@ -77,38 +54,15 @@ Content-Type: application/json
     "dono_id": 1
 }
 
-### Atualizar um pet
-PUT http://localhost:5000/pets/1
-Content-Type: application/json
-
-{
-    "nome": "Rex",
-    "especie": "cachorro",
-    "idade": 5,
-    "dono_id": 1
-}
-
-### Remover um pet
-DELETE http://localhost:5000/pets/5
-
-### Listar todos os pets (com o nome do dono)
-GET http://localhost:5000/pets
-
-### Listar apenas os pets de um dono (filtro por query param)
-GET http://localhost:5000/pets?dono_id=1
-
-### Buscar um pet pelo id
-GET http://localhost:5000/pets/1
-
-### Cadastrar um novo pet
+### Cadastrar pet com dono inexistente (Teste do Desafio - Esperado 404)
 POST http://localhost:5000/pets
 Content-Type: application/json
 
 {
-    "nome": "Bidu",
-    "especie": "cachorro",
-    "idade": 2,
-    "dono_id": 1
+    "nome": "Ghost",
+    "especie": "lobo",
+    "idade": 3,
+    "dono_id": 999
 }
 
 ### Atualizar um pet
@@ -116,11 +70,11 @@ PUT http://localhost:5000/pets/1
 Content-Type: application/json
 
 {
-    "nome": "Rex",
+    "nome": "Rex Senior",
     "especie": "cachorro",
     "idade": 5,
     "dono_id": 1
 }
 
 ### Remover um pet
-DELETE http://localhost:5000/pets/5
+DELETE http://localhost:5000/pets/3
