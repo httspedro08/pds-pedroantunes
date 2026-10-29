@@ -8,6 +8,12 @@ GET http://localhost:5000/donos
 ### Buscar um dono pelo id
 GET http://localhost:5000/donos/1
 
+### Listar os pets de um dono específico (Nova Rota - Aula 03)
+GET http://localhost:5000/donos/1/pets
+
+### Listar pets de um dono inexistente (Esperado 404 - Aula 03)
+GET http://localhost:5000/donos/999/pets
+
 ### Cadastrar um novo dono
 POST http://localhost:5000/donos
 Content-Type: application/json

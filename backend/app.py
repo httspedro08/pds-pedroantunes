@@ -18,7 +18,7 @@ class Dono(db.Model):
     nome = db.Column(db.String(100), nullable=False)
     telefone = db.Column(db.String(20), nullable=False)
 
-    # Relacionamento no Python (não cria coluna no banco)
+    # Relacionamento no Python (com backref cria pet.dono automaticamente)
     pets = db.relationship("Pet", backref="dono", lazy=True)
 
     def to_dict(self):
@@ -62,6 +62,15 @@ def buscar_dono(dono_id):
     if dono is None:
         return jsonify({"erro": "Dono nao encontrado"}), 404
     return jsonify(dono.to_dict())
+
+
+# Rota nova da Aula 03 (Exercício 2): Listar pets de um dono específico usando o relacionamento
+@app.route("/donos/<int:dono_id>/pets", methods=["GET"])
+def listar_pets_do_dono(dono_id):
+    dono = db.session.get(Dono, dono_id)
+    if dono is None:
+        return jsonify({"erro": "Dono nao encontrado"}), 404
+    return jsonify([pet.to_dict() for pet in dono.pets])
 
 
 @app.route("/donos", methods=["POST"])
@@ -139,7 +148,6 @@ def criar_pet():
     if not dados or not all(campo in dados for campo in campos_obrigatorios):
         return jsonify({"erro": "Informe nome, especie, idade e dono_id"}), 400
 
-    # Resolução do Desafio: verifica se o dono existe
     dono = db.session.get(Dono, dados["dono_id"])
     if dono is None:
         return jsonify({"erro": "Dono nao encontrado"}), 404
@@ -169,7 +177,6 @@ def atualizar_pet(pet_id):
     if pet is None:
         return jsonify({"erro": "Pet nao encontrado"}), 404
 
-    # Valida se o novo dono_id informado existe
     dono = db.session.get(Dono, dados["dono_id"])
     if dono is None:
         return jsonify({"erro": "Dono nao encontrado"}), 404
