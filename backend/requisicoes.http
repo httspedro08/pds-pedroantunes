@@ -11,10 +11,10 @@ GET http://localhost:5000/donos/1
 ### Listar os pets de um dono específico (Nova Rota - Aula 03)
 GET http://localhost:5000/donos/1/pets
 
-### Listar pets de um dono inexistente (Esperado 404 - Aula 03)
+### Listar pets de um dono inexistente (Esperado 404)
 GET http://localhost:5000/donos/999/pets
 
-### Cadastrar um novo dono
+### Cadastrar um novo dono (Válido)
 POST http://localhost:5000/donos
 Content-Type: application/json
 
@@ -23,7 +23,16 @@ Content-Type: application/json
     "telefone": "45999110004"
 }
 
-### Atualizar um dono
+### Cadastrar dono inválido (Teste Aula 05 - Esperado 400)
+POST http://localhost:5000/donos
+Content-Type: application/json
+
+{
+    "nome": "",
+    "telefone": "   "
+}
+
+### Atualizar um dono (Válido)
 PUT http://localhost:5000/donos/1
 Content-Type: application/json
 
@@ -49,7 +58,7 @@ GET http://localhost:5000/pets?dono_id=1
 ### Buscar um pet pelo id
 GET http://localhost:5000/pets/1
 
-### Cadastrar um novo pet
+### Cadastrar um novo pet (Válido)
 POST http://localhost:5000/pets
 Content-Type: application/json
 
@@ -60,7 +69,29 @@ Content-Type: application/json
     "dono_id": 1
 }
 
-### Cadastrar pet com dono inexistente (Teste do Desafio - Esperado 404)
+### Cadastrar pet com idade em texto (Teste Aula 05 - Esperado 400)
+POST http://localhost:5000/pets
+Content-Type: application/json
+
+{
+    "nome": "Mel",
+    "especie": "cachorro",
+    "idade": "dois",
+    "dono_id": 1
+}
+
+### Cadastrar pet com idade negativa (Teste Aula 05 - Esperado 400)
+POST http://localhost:5000/pets
+Content-Type: application/json
+
+{
+    "nome": "Mel",
+    "especie": "cachorro",
+    "idade": -3,
+    "dono_id": 1
+}
+
+### Cadastrar pet com dono inexistente (Teste Aula 05 - Esperado 400)
 POST http://localhost:5000/pets
 Content-Type: application/json
 
@@ -71,7 +102,18 @@ Content-Type: application/json
     "dono_id": 999
 }
 
-### Atualizar um pet
+### Cadastrar pet com nome vazio (Teste Aula 05 - Esperado 400)
+POST http://localhost:5000/pets
+Content-Type: application/json
+
+{
+    "nome": "   ",
+    "especie": "gato",
+    "idade": 1,
+    "dono_id": 1
+}
+
+### Atualizar um pet (Válido)
 PUT http://localhost:5000/pets/1
 Content-Type: application/json
 
